@@ -1,8 +1,11 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
+import dotenv from "dotenv";
+dotenv.config();
 import videoCallRoutes from "./routes/videoCallRoutes.js";
 import {initializeServer} from "./config/socketConfig.js"
+
 //config app express
 const app = express();
 app.use(
@@ -31,7 +34,7 @@ app.use("/api/videocall", videoCallRoutes);
 // Inicializar servidor y socket.io
 const server = initializeServer(app);
 
-const SocketPORT = process.env.SocketPORT || 5000;
+const SocketPORT = process.env.SocketPORT
 server.listen(SocketPORT, () => {
   console.log(`Server Socket running on port ${SocketPORT}`);
 });
